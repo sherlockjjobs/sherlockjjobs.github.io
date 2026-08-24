@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sherlock (Junjie) Xu — Academic Homepage</title>
+<meta name="description" content="Sherlock (Junjie) Xu 的学术主页：地球系统科学博士，研究方向为 AI for Earth Science、农业水土环境智能模拟。">
+<style>
+  :root{
+    --bg:#111;
+    --ink:#ccc;
+    --bright:#f0f0f0;
+    --muted:#666;
+    --border:#222;
+    --accent:#66ffd9;
+    --mono:"JetBrains Mono","SF Mono","Cascadia Code","Roboto Mono",Menlo,Consolas,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:var(--mono);
+    font-size:13px;line-height:1.75;
+    letter-spacing:.01em;
+    -webkit-font-smoothing:antialiased;
+    font-feature-settings:"liga","onum";
+  }
+  ::selection{background:var(--accent);color:#111}
+
+  a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-color:#444;transition:color .15s,text-decoration-color .15s}
+  a:hover{color:var(--accent);text-decoration-color:var(--accent)}
+
+  .zh{font-family:var(--mono),"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+
+  /* ============ grid shell ============ */
+  .shell{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr}
+
+  /* ============ sidebar ============ */
+  .side{
+    padding:40px 28px 32px;
+    border-bottom:1px solid var(--border);
+  }
+  .side .status{
+    display:flex;align-items:center;gap:8px;
+    font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+    margin-bottom:28px;
+  }
+  .status .dot{
+    width:7px;height:7px;border-radius:50%;background:var(--accent);
+    box-shadow:0 0 8px var(--accent);flex-shrink:0;
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+  .avatar{
+    width:96px;height:96px;object-fit:cover;
+    border:1px solid var(--border);border-radius:2px;
+    filter:grayscale(1) contrast(1.05);
+    margin-bottom:24px;display:block;
+    transition:border-color .15s,box-shadow .15s;
+  }
+  .avatar:hover{border-color:var(--accent);box-shadow:0 0 16px rgba(102,255,217,.25)}
+  h1{
+    font-size:clamp(24px,3vw,32px);font-weight:650;line-height:1.25;
+    color:var(--bright);letter-spacing:-.01em;
+  }
+  h1 .name-zh{display:block;font-size:14px;font-weight:400;color:var(--muted);margin-top:6px;letter-spacing:.3em}
+  .side .role{margin-top:18px;font-size:12px;color:var(--muted);line-height:1.9}
+  .side .role b{color:var(--ink);font-weight:500}
+  .side nav{margin-top:32px;display:flex;flex-direction:column;gap:2px}
+  .side nav a{
+    text-decoration:none;padding:8px 0;font-size:11.5px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    border-top:1px solid var(--border);display:flex;justify-content:space-between;
+    transition:color .15s,padding-left .15s;
+  }
+  .side nav a span{opacity:0;transition:opacity .15s}
+  .side nav a:hover{color:var(--accent);padding-left:6px}
+  .side nav a:hover span{opacity:1}
+  .side .mail{margin-top:32px;font-size:11.5px}
+  .side .coords{margin-top:24px;font-size:10px;color:#444;letter-spacing:.12em}
+
+  /* ============ content ============ */
+  .content{padding:0 28px 80px}
+  section{border-bottom:1px solid var(--border);padding:48px 0}
+  section:last-of-type{border-bottom:none}
+  h2{
+    font-size:10.5px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:32px;display:flex;align-items:baseline;gap:14px;
+  }
+  h2 .idx{color:var(--muted)}
+
+  /* ---- education ---- */
+  .edu{border-top:1px solid var(--border)}
+  .edu-item{
+    display:grid;grid-template-columns:1fr;gap:4px;
+    padding:18px 0;border-bottom:1px solid var(--border);
+  }
+  .edu-when{font-size:10.5px;color:var(--muted);letter-spacing:.08em}
+  .edu-item h3{font-size:14px;font-weight:550;color:var(--bright)}
+  .edu-item .org{font-size:11.5px;color:var(--muted)}
+  .edu-item .deg{font-size:11.5px}
+  .edu-item .deg em{font-style:normal;color:var(--accent)}
+
+  /* ---- research ---- */
+  .dirs{list-style:none;border-top:1px solid var(--border)}
+  .dirs li{
+    display:flex;gap:18px;align-items:baseline;
+    padding:14px 0;border-bottom:1px solid var(--border);font-size:12.5px;
+  }
+  .dirs li .no{font-size:10px;color:var(--accent);flex-shrink:0;letter-spacing:.1em}
+  .dirs li .en{display:block;font-size:10.5px;color:var(--muted);margin-top:2px}
+
+  /* ---- publications ---- */
+  .pub{border-top:1px solid var(--border);padding:22px 0;position:relative}
+  .pub:last-child{border-bottom:1px solid var(--border)}
+  .pub-no{
+    font-size:10px;color:var(--muted);letter-spacing:.15em;
+    display:block;margin-bottom:8px;
+  }
+  .pub-title{font-size:12.5px;font-weight:500;color:var(--bright);line-height:1.8;max-width:70ch}
+  .pub-meta{
+    margin-top:10px;display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;
+    font-size:11px;color:var(--muted);
+  }
+  .pub-meta .journal{color:var(--ink)}
+  .tag{
+    font-size:9.5px;letter-spacing:.14em;color:var(--accent);
+    border:1px solid #1e4d40;padding:2px 8px;white-space:nowrap;
+  }
+  .tag.review{color:var(--muted);border-color:var(--border)}
+  a.doi{font-size:10.5px;text-decoration:none;border-bottom:1px solid #333;color:var(--muted)}
+  a.doi:hover{color:var(--accent);border-bottom-style:dashed;border-color:var(--accent)}
+  details{margin-top:12px}
+  summary{
+    cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:8px;
+    font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);
+    user-select:none;transition:color .15s;
+  }
+  summary::before{content:"[+]";color:var(--accent);letter-spacing:0}
+  details[open] summary::before{content:"[−]"}
+  summary:hover{color:var(--accent)}
+  details .body{
+    margin-top:12px;padding:14px 16px;border-left:1px solid #1e4d40;
+    font-size:11.5px;line-height:2;max-width:72ch;
+  }
+
+  footer{
+    padding:32px 28px;border-top:1px solid var(--border);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+    font-size:10px;color:#444;letter-spacing:.12em;
+  }
+
+  /* ============ breakpoints ============ */
+  @media (min-width:750px){
+    .edu-item{grid-template-columns:170px 1fr;gap:24px;align-items:baseline}
+  }
+  @media (min-width:1000px){
+    .shell{grid-template-columns:340px 1fr}
+    .side{
+      border-bottom:none;border-right:1px solid var(--border);
+      position:sticky;top:0;height:100vh;overflow:auto;
+      padding:48px 36px;
+      display:flex;flex-direction:column;
+    }
+    .side .coords{margin-top:auto;padding-top:24px}
+    .content{padding:0 48px 96px}
+    section{padding:64px 0}
+  }
+  @media print{
+    body{background:#fff;color:#000}
+    h1,.pub-title,.edu-item h3{color:#000}
+    .side{position:static;height:auto}
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- ============ sidebar ============ -->
+  <header class="side">
+    <p class="status"><span class="dot"></span> Ph.D. Student · Earth System Science</p>
+    <img class="avatar" src="avatar.jpg" alt="Sherlock (Junjie) Xu">
+    <h1>Sherlock<br>(Junjie) Xu<span class="name-zh zh">徐俊杰</span></h1>
+    <p class="role zh">以 AI 与物理引导模型研究陆地表层<br><b>「大气—土壤—水文」</b>耦合过程，<br>关注数据稀缺与极端气候下的时空泛化与不确定性量化。</p>
+    <nav>
+      <a href="#education">Education <span>→</span></a>
+      <a href="#research">Research <span>→</span></a>
+      <a href="#publications">Publications <span>→</span></a>
+    </nav>
+    <p class="mail"><a href="mailto:sherlockjjobs@163.com">sherlockjjobs@163.com</a></p>
+    <p class="coords"><br><span id="clock">--:--:--</span> UTC+8</p>
+  </header>
+
+  <!-- ============ content ============ -->
+  <main class="content">
+
+    <section id="education">
+      <h2><span class="idx">01 /</span> Education <span class="zh">教育背景</span></h2>
+      <div class="edu">
+        <div class="edu-item">
+          <span class="edu-when">2026.09 —</span>
+          <div>
+            <h3 class="zh">天津大学</h3>
+            <p class="org zh">地球系统科学学院 / 表层地球系统科学研究院</p>
+            <p class="deg zh">地球系统科学 · 博士 <em>（理学博士）</em></p>
+          </div>
+        </div>
+        <div class="edu-item">
+          <span class="edu-when">2023.09 — 2026.06</span>
+          <div>
+            <h3 class="zh">中国科学院大学</h3>
+            <p class="org zh">地理科学与资源研究所 / 雄安创新研究院</p>
+            <p class="deg zh">农业管理 · 硕士 <em>（农学硕士）</em></p>
+          </div>
+        </div>
+        <div class="edu-item">
+          <span class="edu-when">2019.08 — 2021.08</span>
+          <div>
+            <h3>Troy University <span class="zh">特洛伊大学</span></h3>
+            <p class="deg zh">计算机科学 · 本科 <em>（理学学士）</em></p>
+          </div>
+        </div>
+        <div class="edu-item">
+          <span class="edu-when">2018.09 — 2022.06</span>
+          <div>
+            <h3 class="zh">江苏理工学院</h3>
+            <p class="org zh">2018.09 — 2019.07 & 2021.09 — 2022.06</p>
+            <p class="deg zh">计算机科学与技术 · 本科 <em>（工学学士）</em></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="research">
+      <h2><span class="idx">02 /</span> Research <span class="zh">研究方向</span></h2>
+      <ol class="dirs">
+        <li>
+          <span class="no">R·01</span>
+          <div><span class="zh">AI for Earth Science：大模型开发</span><span class="en">Large-scale Model Development</span></div>
+        </li>
+        <li>
+          <span class="no">R·02</span>
+          <div><span class="zh">物理引导的农业水土环境智能模拟</span><span class="en">Physics-guided intelligent modeling of agro-hydrological systems</span></div>
+        </li>
+        <li>
+          <span class="no">R·03</span>
+          <div><span class="zh">数据稀缺与极端气候下的时空泛化与不确定性量化</span><span class="en">Spatiotemporal generalization & uncertainty quantification under data scarcity and extreme climate</span></div>
+        </li>
+        <li>
+          <span class="no">R·04</span>
+          <div><span class="zh">陆地表层「大气—土壤—水文」跨圈层耦合与环境效应预测</span><span class="en">Cross-sphere coupling of atmosphere–soil–hydrology and environmental prediction</span></div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="publications">
+      <h2><span class="idx">03 /</span> Publications <span class="zh">学术论文</span></h2>
+
+      <article class="pub">
+        <span class="pub-no">P·01 — 2026</span>
+        <p class="pub-title">Xu, J., Yu, Y., Yang, L., et al. Stratified modeling with layer-adaptive weighted fusion for multi-layer soil moisture prediction in saline arid farmlands.</p>
+        <div class="pub-meta">
+          <span class="journal">Agricultural Water Management, 331: 110463</span>
+          <span class="tag zh">中科院一区</span>
+          <a class="doi" href="https://doi.org/10.1016/j.agwat.2026.110463" target="_blank" rel="noopener">doi:10.1016/j.agwat.2026.110463</a>
+        </div>
+        <details>
+          <summary class="zh">贡献与创新</summary>
+          <p class="body zh">本研究提出一种融合 TimesNet 与随机森林的分层加权集成框架，精准模拟新疆盐碱地 0–350 cm 多层土壤水分动态。基于高频原位观测数据，研究揭示浅层（0–60 cm）受气象与植被主导、深层（&gt;100 cm）由地下水控制的垂向分异机制，并通过引入历史时序特征与实测土壤水分，显著提升深层预测精度（250 cm 处 MAE 低至 0.030 m³/m³）。</p>
+        </details>
+      </article>
+
+      <article class="pub">
+        <span class="pub-no">P·02 — 2026</span>
+        <p class="pub-title">Xu, J., Wei, X., Yu, Y., et al. Hydrochemistry and modeling nitrate concentration in farmland groundwater under different hydrological seasons by integrating hybrid quantum-classical ML, virtual sample generation and AlphaEarth Foundation.</p>
+        <div class="pub-meta">
+          <span class="journal">Hydrology and Earth System Sciences</span>
+          <span class="tag zh">中科院一区</span>
+          <span class="tag review">Under review</span>
+        </div>
+        <details>
+          <summary class="zh">贡献与创新</summary>
+          <p class="body zh">本研究提出一种融合混合量子-经典机器学习、t-SNE-GMM-KNN 虚拟样本生成与 AlphaEarth 遥感语义嵌入的集成框架，有效解决了农田地下水硝酸盐浓度在不同水文季节（平水期、枯水期、丰水期）预测中面临的小样本、强时空异质性与数据稀缺难题。研究发现硝酸盐主要来源于生活污水与畜禽粪便（占比 74.1%），并受蒸发浓缩驱动在枯水期显著累积；所构建的量子增强随机森林模型在枯水期 R² 由 0.284 提升至 &gt;0.85，仅用遥感语义特征亦可实现快速筛查（R² 最高达 0.86），为农业区地下水氮污染精准防控与可持续管理提供了新方法。</p>
+        </details>
+      </article>
+
+      <article class="pub">
+        <span class="pub-no">P·03 — 2026</span>
+        <p class="pub-title">Xu, J., Yu, Y., Yang, L., et al. Cross-domain prediction of soil water isotopes in data-scarce arid agricultural systems: integrating in-situ process analysis, transfer learning, and mechanistic interpretation.</p>
+        <div class="pub-meta">
+          <span class="journal">Computers and Electronics in Agriculture</span>
+          <span class="tag zh">中科院一区</span>
+          <span class="tag review">Under review</span>
+        </div>
+        <details>
+          <summary class="zh">贡献与创新</summary>
+          <p class="body zh">该论文系统揭示了新疆红旗农场土壤水同位素的垂向三层分馏结构及灌溉方式与作物类型对水分运移和根系吸水的调控机制；提出了融合迁移学习与局地蒸发线自适应校正（LEAC）的跨域预测框架，在极端少样本条件下将深层 δ¹⁸O 预测误差由 12.06‰ 降至 1.58‰、过渡层误差降低 40%–60%，并通过 DeepSHAP 解析证实土壤质地是跨域稳定泛化的关键不变特征，为数据稀缺区土壤水同位素跨域预测提供了有效、可解释的新途径。</p>
+        </details>
+      </article>
+
+      <article class="pub">
+        <span class="pub-no">P·04 — 2026</span>
+        <p class="pub-title">Xu, J., Yu, Y., Yang, L., et al. Predicting ion-specific soil salinity using latent diffusion-enhanced spatial-depth graph-random forest framework in arid saline farmlands.</p>
+        <div class="pub-meta">
+          <span class="journal">International Soil and Water Conservation Research</span>
+          <span class="tag zh">中科院一区</span>
+          <span class="tag review">Under review</span>
+        </div>
+        <details>
+          <summary class="zh">贡献与创新</summary>
+          <p class="body zh">该论文基于新疆 0–360 cm 深剖面观测，揭示了盐分离子的空间–深度分异规律及 20–40 cm 盐分突变界面；创新性地提出了融合空间–深度图拓扑、物理化学约束与潜扩散数据增强的 DiffSDG-RF 框架，仅利用 EC、pH、含水量等易获取指标即可高精度预测剖面离子含量（跨灌区验证 R² 达 0.927），且保持了离子间的物理化学一致性，为干旱区盐碱地离子级盐分诊断与水盐精准调控提供了稳健、可区域推广的新工具。</p>
+        </details>
+      </article>
+
+      <article class="pub">
+        <span class="pub-no">P·05 — 2026</span>
+        <p class="pub-title">Xu, J., Yu, Y., Yang, L., et al. Physics-guided forecasting of farmland profile soil moisture under reclaimed water irrigation and nitrogen management.</p>
+        <div class="pub-meta">
+          <span class="journal">Smart Agricultural Technology</span>
+          <span class="tag zh">中科院二区</span>
+          <span class="tag review">Under review</span>
+        </div>
+        <details>
+          <summary class="zh">贡献与创新</summary>
+          <p class="body zh">基于雄安新区两年高频原位观测，定量揭示了再生水灌溉与氮肥配施对农田剖面土壤水分的分层调控机制；发现了土壤水分尺度不变的幂律长程相关性及约 2–3 周的预测期限；提出的物理引导深度学习模型 FPW-CGQN 显著优于 GRU、LSTM、Transformer 等主流模型；再生水配施氮肥可使产量和灌溉水利用效率提升 10.5%–17.6%，为华北平原再生水安全利用与精准灌溉提供了理论和技术支撑。</p>
+        </details>
+      </article>
+
+      <article class="pub">
+        <span class="pub-no">P·06 — 2026</span>
+        <p class="pub-title">Xu, J., Yu, Y., Yang, L., et al. Distinct spatiotemporal responses of soil-vegetation-hydrology to warming from 2005–2022 and predicting air temperature of provincial spatial scale using Kolmogorov-Arnold graph convolutional network in mainland China.</p>
+        <div class="pub-meta">
+          <span class="journal">Natural Hazards and Earth System Sciences</span>
+          <span class="tag zh">中科院二区</span>
+          <span class="tag review">Under review</span>
+        </div>
+        <details>
+          <summary class="zh">贡献与创新</summary>
+          <p class="body zh">该研究构建了 2005–2022 年中国省级月尺度多源环境数据集，系统揭示了土壤-植被-水文系统对升温的时空响应特征，并提出一种融合 Kolmogorov-Arnold 网络与图卷积网络（KAN-GCN）的模型，用于高精度预测省级气温。模型在 2021–2022 年测试集上达到 R²=0.9889，优于传统 MLP-GCN，尤其在新疆、青海等生态脆弱区误差降低 15–30%。研究发现地表土壤温度是气温预测的最关键因子，凸显土壤-大气热耦合的核心作用，并通过 LISA 空间误差分析验证了 KAN-GCN 更强的空间鲁棒性。</p>
+        </details>
+      </article>
+
+      <article class="pub">
+        <span class="pub-no">P·07 — 2026</span>
+        <p class="pub-title">Xu, J., Gao, H., Yu, Y., et al. Enhanced pollutant removal and greenhouse gas mitigation in constructed wetland-microbial fuel cells with pyrite and manganese ore anodes treating actual domestic sewage.</p>
+        <div class="pub-meta">
+          <span class="journal">Journal of Environmental Management</span>
+          <span class="tag zh">中科院二区</span>
+          <span class="tag review">Under review</span>
+        </div>
+        <details>
+          <summary class="zh">贡献与创新</summary>
+          <p class="body zh">本研究构建了以黄铁矿、锰矿石为阳极的人工湿地-微生物燃料电池（CW-MFC）系统，以实际低 C/N 生活污水为对象，首次在同一框架内系统评估污染物去除、温室气体排放、产电性能与微生物机制。MFC 耦合使 COD、NH₄⁺-N、NO₃⁻-N、TN、TP 去除率较传统湿地提高 3.52%–35.02%，全球增温潜势降低 60.08%–70.66%；黄铁矿阳极系统综合性能最优，最大功率密度提高约 400%，CH₄ 和 N₂O 排放进一步降低 40.47% 和 45.86%。研究从「电子流再分配」视角揭示了污染削减与温室气体减排的协同机制，为低碳水处理提供了理论依据与技术支撑。</p>
+        </details>
+      </article>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <span>© 2026 SHERLOCK (JUNJIE) XU</span>
+  <span>LAST UPDATED · 2026.08</span>
+</footer>
+
+<script>
+  (function(){
+    var el = document.getElementById('clock');
+    function pad(n){ return (n < 10 ? '0' : '') + n; }
+    function tick(){
+      var now = new Date(Date.now() + (8 * 60 + new Date().getTimezoneOffset()) * 60000);
+      el.textContent = pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+</script>
+
+</body>
+</html>
